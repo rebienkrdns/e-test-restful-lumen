@@ -17,6 +17,8 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->post('customer/create', [
-    'uses' => 'MainController@registroCliente'
-]);
+$router->post('customer/create', ['uses' => 'MainController@registroCliente']);
+$router->post('wallet/recharge', ['uses' => 'MainController@recargaBilletera']);
+$router->post('pay/create', ['uses' => 'MainController@pagar']);
+$router->post('pay/confirm', ['uses' => 'MainController@confirmarPago']);
+$router->post('balance/check', ['uses' => 'MainController@consultarSaldo']);

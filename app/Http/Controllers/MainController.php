@@ -16,13 +16,47 @@ class MainController extends Controller
         ]));
     }
 
+    public function recargaBilletera(Request $request)
+    {
+        return $this->cast('recargaBilletera', $request->only([
+            'documento',
+            'celular',
+            'valor'
+        ]));
+    }
+
+    public function pagar(Request $request)
+    {
+        return $this->cast('pagar', $request->only([
+            'documento',
+            'celular',
+            'valor'
+        ]));
+    }
+
+    public function confirmarPago(Request $request)
+    {
+        return $this->cast('confirmarPago', $request->only([
+            'id',
+            'token'
+        ]));
+    }
+
+    public function consultarSaldo(Request $request)
+    {
+        return $this->cast('consultarSaldo', $request->only([
+            'documento',
+            'celular'
+        ]));
+    }
+
     private function cast(string $method, array $args)
     {
         $soapUrl = env('SOAP_URL');
 
         $content = '';
         foreach ($args as $key => $arg) {
-            $content .= "<$key>$arg</$key>";
+            $content .= "<$key>$arg</$key>\n";
         }
 
         $xmlPayload = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:soap=\"$soapUrl\">
